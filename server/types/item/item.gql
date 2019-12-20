@@ -1,9 +1,19 @@
 type Item {
+  id: ID!
   title: String!
   description: String
 }
 
 type Query {
   items: [Item]!
-  item: Item!
+  item(id: Int!): Item!
+}
+
+input ItemInput {
+  title: String!
+  description: String
+}
+
+type Mutation {
+  createItem(input: ItemInput!): Item!
 }
