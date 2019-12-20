@@ -1,0 +1,9 @@
+type Item {
+  title: String!
+  description: String
+}
+
+type Query {
+  items: [Item]!
+  item: Item!
+}

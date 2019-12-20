@@ -1,0 +1,25 @@
+{
+  "name": "graphql-todo-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon server",
+    "seed": "node server/db/utils/seed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.9.14",
+    "express": "^4.17.1",
+    "graphql": "^14.5.8",
+    "pg": "^7.15.1",
+    "sequelize": "^5.21.3"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0",
+    "nodemon": "^2.0.2"
+  }
+}
