@@ -1,5 +1,5 @@
-const conn = require('../../db/utils/conn');
-const { Sequelize } = conn;
+const conn = require('../../db/utils/conn')
+const { Sequelize } = conn
 
 const Item = conn.define('item', {
   title: Sequelize.STRING,

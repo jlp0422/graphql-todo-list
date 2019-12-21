@@ -1,15 +1,18 @@
 const Item = require('./item.model')
 
-const items = () => {
-  return Item.findAll()
+const items = async () => {
+  const items = await Item.findAll()
+  return items
 }
 
-const item = (parent, { id }) => {
-  return Item.findOne({ where: { id } })
+const item = async (parent, { id }) => {
+  const item = await Item.findOne({ where: { id } })
+  return item
 }
 
-const createItem = (parent, { input }) => {
-  return Item.create({ ...input })
+const createItem = async (parent, { input }) => {
+  const item = await Item.create({ ...input })
+  return item
 }
 
 const itemResolvers = {
