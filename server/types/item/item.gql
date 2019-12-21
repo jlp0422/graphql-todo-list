@@ -10,7 +10,13 @@ type Query {
 }
 
 input ItemInput {
+  """
+  Item title
+  """
   title: String!
+  """
+  Item description
+  """
   description: String
 }
 

@@ -1,6 +1,8 @@
 const { ApolloServer } = require('apollo-server')
 const { loadTypeSchema } = require('./utils/loadSchema')
 const itemResolvers = require('./types/item/item.resolvers')
+const { config } = require('dotenv')
+config()
 
 const types = ['item']
 
@@ -15,11 +17,16 @@ const start = async () => {
 
   const server = new ApolloServer({
     typeDefs: [rootSchema, ...schemaTypes],
-    resolvers: itemResolvers //merge({}, item),
-    // async context({ req }) {
-    //   const user = await authenticate(req)
-    //   return { user }
-    // }
+    resolvers: itemResolvers, //merge({}, item),
+    // tracing: true,
+    // introspection: true,
+    // playground: true,
+    async context({ req }) {
+      // console.log(req)
+      // const user = await authenticate(req)
+      // return { user }
+      return { token: '123' }
+    }
   })
 
   const { url } = await server.listen({ port: 3000 })
