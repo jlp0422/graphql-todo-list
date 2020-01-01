@@ -9,7 +9,7 @@ type Query {
   item(id: Int!): Item!
 }
 
-input ItemInput {
+input CreateItemInput {
   """
   Item title
   """
@@ -20,6 +20,11 @@ input ItemInput {
   description: String
 }
 
+input RemoveItemInput {
+  id: ID!
+}
+
 type Mutation {
-  createItem(input: ItemInput!): Item!
+  createItem(input: CreateItemInput!): Item!
+  removeItem(input: RemoveItemInput): Boolean!
 }

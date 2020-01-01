@@ -15,13 +15,19 @@ const createItem = async (parent, { input }) => {
   return item
 }
 
+const removeItem = async (parent, { input }) => {
+  const removedItems = await Item.destroy({ where: { id: input.id } })
+  return Boolean(removedItems)
+}
+
 const itemResolvers = {
   Query: {
     items,
     item
   },
   Mutation: {
-    createItem
+    createItem,
+    removeItem
   }
 }
 

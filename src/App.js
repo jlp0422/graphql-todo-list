@@ -2,16 +2,23 @@ import React, { Fragment, useState } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import GET_ITEMS from './queries/items'
 import CREATE_ITEM from './queries/createItem'
+import REMOVE_ITEM from './queries/removeItem'
+
+const refetchQueries = { refetchQueries: ['AllItems'] }
 
 const App = () => {
   const { data, loading, error } = useQuery(GET_ITEMS)
   const [title, setTitle] = useState('')
   const [desc, setDesc] = useState('')
   const [addItem] = useMutation(CREATE_ITEM, {
-    refetchQueries: ['AllItems'],
+    ...refetchQueries,
     variables: {
       input: { title, description: desc }
     }
+  })
+
+  const [removeItem] = useMutation(REMOVE_ITEM, {
+    ...refetchQueries
   })
 
   if (loading) {
@@ -24,7 +31,6 @@ const App = () => {
   return (
     <Fragment>
       <h1>My To Do List</h1>
-      {/* <button onClick={}>Reload List</button><br /> */}
       <input
         placeholder={'title'}
         value={title}
@@ -44,20 +50,16 @@ const App = () => {
       >
         Add Item
       </button>
-      {/* {mutationData && (
-        <>
-          <h5>New Item Created</h5>
-          <p>
-            {mutationData.createItem.title},{' '}
-            {mutationData.createItem.description}
-          </p>
-        </>
-      )} */}
       <ol>
-        {data.items.map(item => (
-          <li key={item.id}>
-            <h3>{item.title}</h3>
-            <h5>{item.description}</h5>
+        {data.items.map(({ id, title, description }) => (
+          <li key={id}>
+            <h3>{title}</h3>
+            <h5>{description}</h5>
+            <button
+              onClick={() => removeItem({ variables: { input: { id } } })}
+            >
+              mark as done
+            </button>
           </li>
         ))}
       </ol>
