@@ -13,6 +13,7 @@ const App = () => {
       input: { title, description: desc }
     }
   })
+
   if (loading) {
     return <h2>Loading</h2>
   }
